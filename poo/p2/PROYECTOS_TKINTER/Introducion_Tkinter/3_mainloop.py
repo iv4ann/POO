@@ -1,0 +1,13 @@
+from tkinter import *
+ventana=Tk()
+ventana.geometry("600x400")
+ventana.title("Uso del mainloop")
+marco1=Frame(ventana,width=600,height=50,background="#F10909").pack()
+marco1=Frame(ventana,width=600,height=50,background="#FF6F00").pack()
+marco1=Frame(ventana,width=600,height=50,background="#FFF700").pack()
+marco1=Frame(ventana,width=600,height=50,background="#26FF00").pack()
+marco1=Frame(ventana,width=600,height=50,background="#004CFF").pack()
+marco1=Frame(ventana,width=600,height=50,background="#9F00CF").pack()
+marco1=Frame(ventana,width=600,height=50,background="#FFFFFF").pack()
+marco1=Frame(ventana,width=600,height=50,background="#000000").pack()
+ventana.mainloop()
