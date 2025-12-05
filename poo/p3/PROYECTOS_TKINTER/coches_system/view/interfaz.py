@@ -7,8 +7,8 @@ class vistas(tk.Tk):
         super().__init__()
         self.title("Coches")
         self.geometry("800x600")
-
-        self.container = tk.Frame(self)
+        self.configure(bg="#0A3869")
+        self.container = tk.Frame(self,bg="#0C0A69")
         self.container.pack(fill="both", expand=True)
         self.menu_principal()
     def limpiar(self):
@@ -385,6 +385,15 @@ class vistas(tk.Tk):
         tk.Label(self.container,text='Ingrese el ID de la camioneta que desea actualizar').pack()
         self.entry_camioneta_id_update = tk.Entry(self.container)
         self.entry_camioneta_id_update.pack()
+        
+        
+        tk.Button(self.container, text='Buscar', command=self.actualizar_camioneta_if).pack(padx=10, pady=10)
+        tk.Button(self.container, text='Regresar', command=self.camionetas).pack(padx=10, pady=10)
+    def actualizar_camioneta_if(self):
+        camioneta_id = self.entry_camioneta_id_update.get().strip()
+        if not camioneta_id:
+            messagebox.showerror("Error, debe ingresar un ID que exista en la base de datos")
+            return
         tk.Label(self.container,text='Nueva marca (opcional)').pack()
         self.entry_camioneta_up_marca = tk.Entry(self.container)
         self.entry_camioneta_up_marca.pack()
@@ -464,3 +473,18 @@ class vistas(tk.Tk):
             self.camionetas()
         except Exception as e:
             messagebox.showerror('Error', f'Error al eliminar: {e}')
+    def guardar_camion(self):
+        marca = self.entry_cam_marca.get()
+        color = self.entry_cam_color.get()
+        modelo = self.entry_cam_modelo.get()
+        velocidad = self.entry_cam_velocidad.get()
+        caballaje = self.entry_cam_caballaje.get()
+        plazas = self.entry_cam_plazas.get()
+        eje=self.entry_cam_eje.get()
+        capacidadcarga=self.entry_cam_capacidad.get()
+        try:
+            new_id = insertar_camion_controller(marca, color, modelo, velocidad, caballaje, plazas,eje,capacidadcarga)
+            messagebox.showinfo('OK', f'Auto insertado con ID {new_id}')
+            self.autos()
+        except Exception as e:
+            messagebox.showerror('Error', f'No se pudo insertar el auto: {e}')
